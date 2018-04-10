@@ -1,0 +1,32 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"> 
+  <!-- Allow versions as msbuild arguments -->
+
+  <PropertyGroup>
+    <PRODUCT_MAJOR Condition="$(PRODUCT_MAJOR) == ''">7</PRODUCT_MAJOR>
+    <PRODUCT_MINOR Condition="$(PRODUCT_MINOR) == ''">1</PRODUCT_MINOR>
+    <BUILD_MAJOR Condition="$(BUILD_MAJOR) == ''">1985</BUILD_MAJOR>
+    <BUILD_MINOR Condition="$(BUILD_MINOR) == ''">0</BUILD_MINOR>
+  </PropertyGroup>
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalOptions>/DPRODUCT_MAJOR=$(PRODUCT_MAJOR) %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile>
+      <AdditionalOptions>/DPRODUCT_MINOR=$(PRODUCT_MINOR) %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile>
+      <AdditionalOptions>/DBUILD_MAJOR=$(BUILD_MAJOR) %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <ClCompile>
+      <AdditionalOptions>/DBUILD_MINOR=$(BUILD_MINOR) %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <PropertyGroup>
+    <ResourceCompilePreprocessorDefinitions Condition="$(PRODUCT_MAJOR) != ''">PRODUCT_MAJOR=$(PRODUCT_MAJOR);$(ResourceCompilePreprocessorDefinitions)</ResourceCompilePreprocessorDefinitions>
+    <ResourceCompilePreprocessorDefinitions Condition="$(PRODUCT_MINOR) != ''">PRODUCT_MINOR=$(PRODUCT_MINOR);$(ResourceCompilePreprocessorDefinitions)</ResourceCompilePreprocessorDefinitions>
+    <ResourceCompilePreprocessorDefinitions Condition="$(BUILD_MAJOR) != ''">BUILD_MAJOR=$(BUILD_MAJOR);$(ResourceCompilePreprocessorDefinitions)</ResourceCompilePreprocessorDefinitions>
+    <ResourceCompilePreprocessorDefinitions Condition="$(BUILD_MINOR) != ''">BUILD_MINOR=$(BUILD_MINOR);$(ResourceCompilePreprocessorDefinitions)</ResourceCompilePreprocessorDefinitions>
+  </PropertyGroup>
+</Project>
