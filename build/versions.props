@@ -4,8 +4,14 @@
   <PropertyGroup>
     <PRODUCT_MAJOR Condition="$(PRODUCT_MAJOR) == ''">7</PRODUCT_MAJOR>
     <PRODUCT_MINOR Condition="$(PRODUCT_MINOR) == ''">1</PRODUCT_MINOR>
-    <BUILD_MAJOR Condition="$(BUILD_MAJOR) == ''">1985</BUILD_MAJOR>
-    <BUILD_MINOR Condition="$(BUILD_MINOR) == ''">0</BUILD_MINOR>
+    <!-- Auto bump the build version based on current date -->
+    <!-- format:MMMDD, MMM indicates the total number of months since Dep 2016),  DD indicates the number of days in current month-->
+    <VersionDateMonths>$([MSBuild]::Multiply(12,$([MSBuild]::Subtract($([System.DateTime]::Now.Year), 2016))))</VersionDateMonths>
+    <VersionDateTotalMonths>$([MSBuild]::Add( $([MSBuild]::Subtract($([System.DateTime]::Now.Month), 10)), $(VersionDateMonths))) </VersionDateTotalMonths>
+    <VersionDateDays>$([System.DateTime]::Now.ToString("dd"))</VersionDateDays>
+    <VersionBuildMajor>$([System.String]::Concat($([System.Int32]::Parse('$(VersionDateTotalMonths)').ToString("D3")), $(VersionDateDays)))</VersionBuildMajor>
+    <BUILD_MAJOR Condition="$(BUILD_MAJOR) == ''">$(VersionBuildMajor)</BUILD_MAJOR>
+    <BUILD_MINOR Condition="$(BUILD_MINOR) == ''">$([System.DateTime]::Now.ToString("HHmm"))</BUILD_MINOR>
   </PropertyGroup>
 
   <ItemDefinitionGroup>
