@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT license.
+
 // BLDVER.RC - Standard version resource for CoreXT applications.
 
 // Before including this file into your .rc, define the following
@@ -5,11 +8,6 @@
 //     #define RC_VERSION_FILE_DESCRIPTION "Test DLL\0"
 //     #define RC_VERSION_INTERNAL_NAME "Test\0"
 //     #define RC_VERSION_ORIGINAL_FILE_NAME "Test.DLL\0"
-
-//
-// if you want to use a private version file and customize this, see
-// file://samsndrop02/CoreXT-Latest/docs/corext/corext/version.htm
-//
 
 #include <winver.h>
 #include <bldver.h>
