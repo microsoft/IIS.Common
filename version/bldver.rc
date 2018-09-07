@@ -36,7 +36,7 @@ FILEFLAGSMASK 0x3fL
 #endif
 
 #ifndef RC_VERSION_LEGAL_COPYRIGHT
-    #define RC_VERSION_LEGAL_COPYRIGHT "Copyright \251 2011 Microsoft Corporation\0"
+    #define RC_VERSION_LEGAL_COPYRIGHT "Copyright \251 Microsoft Corporation\0"
 #endif
 
 #ifndef RC_VERSION_LEGAL_TRADEMARKS
