@@ -1,3 +1,5 @@
+[![Build Status](https://devdiv.visualstudio.com/DevDiv/_apis/build/status/IIS/IIS.Common/IIS.Common%20CI%20(Yaml))](https://devdiv.visualstudio.com/DevDiv/_build/latest?definitionId=10268)
+
 Microsoft IIS Common
 --------------------------------
 
