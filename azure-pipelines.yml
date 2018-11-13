@@ -26,15 +26,6 @@ jobs:
     displayName: 'Component Detection'
 
   - task: VSBuild@1
-    displayName: 'Build x86'
+    displayName: 'Build Default Configuration'
     inputs:
       solution: '*.sln'
-      platform: x86
-      configuration: 'release'
-
-  - task: VSBuild@1
-    displayName: 'Build x64'
-    inputs:
-      solution: '*.sln'
-      platform: x64
-      configuration: 'release'
