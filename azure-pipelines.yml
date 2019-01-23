@@ -29,3 +29,4 @@ jobs:
     displayName: 'Build Default Configuration'
     inputs:
       solution: '*.sln'
+ 
