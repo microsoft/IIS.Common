@@ -1,6 +1,6 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <MicroBuildVersion>0.2.0</MicroBuildVersion>
+    <MicroBuildVersion>0.4.1</MicroBuildVersion>
   </PropertyGroup>
 
 <!-- Item Group evaluated after TargetName and TargetExt are defined -->
@@ -11,14 +11,14 @@
     </FilesToSign>
   </ItemGroup>
 
-  <Import Project="$(UserProfile)\.nuget\packages\MicroBuild.Core\$(MicroBuildVersion)\build\MicroBuild.Core.props" Condition="Exists('$(UserProfile)\.nuget\packages\MicroBuild.Core\$(MicroBuildVersion)\build\MicroBuild.Core.props')" />
+  <Import Project="$(UserProfile)\.nuget\packages\microsoft.visualstudioeng.microbuild.core\$(MicroBuildVersion)\build\Microsoft.VisualStudioEng.MicroBuild.Core.props" Condition="Exists('$(UserProfile)\.nuget\packages\microsoft.visualstudioeng.microbuild.core\$(MicroBuildVersion)\build\Microsoft.VisualStudioEng.MicroBuild.Core.props')" />
 
   <Target Name="EnsureSigningPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('$(UserProfile)\.nuget\packages\MicroBuild.Core\$(MicroBuildVersion)\build\MicroBuild.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '$(UserProfile)\.nuget\packages\MicroBuild.Core\$(MicroBuildVersion)\build\MicroBuild.Core.props'))" />
-    <Error Condition="!Exists('$(UserProfile)\.nuget\packages\MicroBuild.Core\$(MicroBuildVersion)\build\MicroBuild.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(UserProfile)\.nuget\packages\MicroBuild.Core\$(MicroBuildVersion)\build\MicroBuild.Core.targets'))" />
+    <Error Condition="!Exists('$(UserProfile)\.nuget\packages\microsoft.visualstudioeng.microbuild.core\$(MicroBuildVersion)\build\Microsoft.VisualStudioEng.MicroBuild.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '$(UserProfile)\.nuget\packages\microsoft.visualstudioeng.microbuild.core\$(MicroBuildVersion)\build\Microsoft.VisualStudioEng.MicroBuild.Core.props'))" />
+    <Error Condition="!Exists('$(UserProfile)\.nuget\packages\microsoft.visualstudioeng.microbuild.core\$(MicroBuildVersion)\build\Microsoft.VisualStudioEng.MicroBuild.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(UserProfile)\.nuget\packages\microsoft.visualstudioeng.microbuild.core\$(MicroBuildVersion)\build\Microsoft.VisualStudioEng.MicroBuild.Core.targets'))" />
   </Target>
 
 </Project>
