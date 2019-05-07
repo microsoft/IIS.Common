@@ -19,6 +19,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <OutDir>bin\$(Configuration)\$(PlatformShortname)\</OutDir>
     <IntDir>obj\$(Configuration)\$(PlatformShortname)\</IntDir>
+    <SpectreMitigation>Spectre</SpectreMitigation>
   </PropertyGroup>
 
   <!--
