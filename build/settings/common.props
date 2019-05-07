@@ -19,6 +19,7 @@
     <CharacterSet>Unicode</CharacterSet>
     <OutDir>bin\$(Configuration)\$(PlatformShortname)\</OutDir>
     <IntDir>obj\$(Configuration)\$(PlatformShortname)\</IntDir>
+    <SpectreMitigation>Spectre</SpectreMitigation>
   </PropertyGroup>
 
   <!--
@@ -28,6 +29,7 @@
   <ItemDefinitionGroup>
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
     </ClCompile>
   </ItemDefinitionGroup>
 
@@ -43,6 +45,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
     <ClCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ControlFlowGuard>Guard</ControlFlowGuard>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
