@@ -14,7 +14,6 @@
     <ClCompile>
       <StringPooling>true</StringPooling>
       <Optimization>Disabled</Optimization>
-      <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
