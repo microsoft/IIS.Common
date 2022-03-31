@@ -9,12 +9,14 @@
   <PropertyGroup>
     <PlatformShortname Condition="'$(PlatformShortname)' == '' AND '$(Platform)' == 'x64'">x64</PlatformShortname>
     <PlatformShortname Condition="'$(PlatformShortname)' == '' AND ('$(Platform.ToLower())' == 'win32' OR '$(Platform)' == 'x86')">x86</PlatformShortname>
+    <PlatformShortname Condition="'$(PlatformShortname)' == '' AND '$(Platform.ToLower())' == 'arm64'">arm64</PlatformShortname>
+    <PlatformShortname Condition="'$(PlatformShortname)' == '' AND '$(Platform.ToLower())' == 'arm64ec'">arm64ec</PlatformShortname>
   </PropertyGroup>
 
   <!-- General properties -->
 
   <PropertyGroup>
-    <IisOobWinSdkVersion Condition="'$(IisOobWinSdkVersion)' == ''">8.1</IisOobWinSdkVersion>
+    <IisOobWinSdkVersion Condition="'$(IisOobWinSdkVersion)' == ''">10.0</IisOobWinSdkVersion>
     <WindowsTargetPlatformVersion Condition="'$(WindowsTargetPlatformVersion)' == ''">$(IisOobWinSdkVersion)</WindowsTargetPlatformVersion>
     <CharacterSet>Unicode</CharacterSet>
     <OutDir>bin\$(Configuration)\$(PlatformShortname)\</OutDir>
