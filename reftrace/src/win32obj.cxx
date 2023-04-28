@@ -271,10 +271,9 @@ Return Value:
                         MaximumCount,               // lMaximumCount
                         objName                     // lpName
                         );
-    }
-
-    if( objHandle != NULL ) {
-        InterlockedIncrement( &g_PuDbgSemaphoresCreated );
+        if( objHandle != NULL ) {
+            InterlockedIncrement( &g_PuDbgSemaphoresCreated );
+        }
     }
 
     return objHandle;
