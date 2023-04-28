@@ -251,8 +251,8 @@ Return Value:
 
 {
 
-    LPSTR objName;
-    HANDLE objHandle;
+    LPSTR objName = NULL;
+    HANDLE objHandle = NULL;
     CHAR objNameBuffer[MAX_OBJECT_NAME];
 
     objName = PuDbgpBuildObjectName(
@@ -264,12 +264,14 @@ Return Value:
                   Address
                   );
 
-    objHandle = CreateSemaphoreA(
-                    NULL,                       // lpSemaphoreAttributes
-                    InitialCount,               // lInitialCount
-                    MaximumCount,               // lMaximumCount
-                    objName                     // lpName
-                    );
+    if (objName != NULL) {
+        objHandle = CreateSemaphoreA(
+                        NULL,                       // lpSemaphoreAttributes
+                        InitialCount,               // lInitialCount
+                        MaximumCount,               // lMaximumCount
+                        objName                     // lpName
+                        );
+    }
 
     if( objHandle != NULL ) {
         InterlockedIncrement( &g_PuDbgSemaphoresCreated );
@@ -319,8 +321,8 @@ Return Value:
 
 {
 
-    LPSTR objName;
-    HANDLE objHandle;
+    LPSTR objName = NULL;
+    HANDLE objHandle = NULL;
     CHAR objNameBuffer[MAX_OBJECT_NAME];
 
     objName = PuDbgpBuildObjectName(
@@ -332,14 +334,16 @@ Return Value:
                   Address
                   );
 
-    objHandle = CreateMutexA(
-                    NULL,                       // lpMutexAttributes
-                    InitialOwner,               // bInitialOwner,
-                    objName                     // lpName
-                    );
+    if ( objName != NULL) {
+        objHandle = CreateMutexA(
+                        NULL,                       // lpMutexAttributes
+                        InitialOwner,               // bInitialOwner,
+                        objName                     // lpName
+                        );
 
-    if( objHandle != NULL ) {
-        InterlockedIncrement( &g_PuDbgMutexesCreated );
+        if( objHandle != NULL ) {
+            InterlockedIncrement( &g_PuDbgMutexesCreated );
+        }
     }
 
     return objHandle;
