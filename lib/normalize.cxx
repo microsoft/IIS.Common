@@ -706,11 +706,11 @@ Return Value:
     
     if ( pszUrl )
     {
-        STACK_BUFFER( buffUrlOutput, MAX_PATH );
-        STACK_STRA(   strUrlA, MAX_PATH );
-        LPWSTR        szQueryString;
-        DWORD         cchData;
-        DWORD         cbOutput;
+        STACK_STRU( strUrlOutputW, MAX_PATH );
+        STACK_STRA( strUrlA, MAX_PATH );
+        LPWSTR      szQueryString;
+        DWORD       cchData;
+        DWORD       cbOutput;
 
         cchData = (DWORD)strlen( pszUrl );
 
@@ -718,7 +718,7 @@ Return Value:
         // Prepare the Output string
         //
         
-        if ( !buffUrlOutput.Resize( ( cchData + 1 ) *sizeof( WCHAR ) ) )  
+        if ( FAILED( hr = strUrlOutputW.Resize( ( cchData + 1 ) ) ) )
         {
             return HRESULT_FROM_WIN32( GetLastError() );
         }
@@ -731,7 +731,7 @@ Return Value:
             pszUrl,
             cchData,
             &cbOutput,
-            (WCHAR *) buffUrlOutput.QueryPtr(),
+            strUrlOutputW.QueryStr(),
             &szQueryString
             );
 
@@ -748,14 +748,16 @@ Return Value:
 
         if ( szQueryString != NULL )
         {
-            ((WCHAR *) buffUrlOutput.QueryPtr())[ cbOutput - wcslen( szQueryString )] = 0;
+            ( strUrlOutputW.QueryStr())[ cbOutput / sizeof( WCHAR ) - wcslen( szQueryString )] = 0;
         }
+
+        strUrlOutputW.SyncWithBuffer();
 
         //
         // Write the normalized URL over the input data
         //
 
-        hr = strUrlA.CopyW( (WCHAR *) buffUrlOutput.QueryPtr() );
+        hr = strUrlA.CopyW( strUrlOutputW.QueryStr() );
 
         if ( FAILED( hr ) )
         {
@@ -811,11 +813,11 @@ Return Value:
     
     if ( pszUrl )
     {
-        STACK_BUFFER( buffUrlOutput, MAX_PATH );
-        STACK_STRA(   strUrlA, MAX_PATH );
-        LPWSTR        szQueryString;
-        DWORD         cchData;
-        DWORD         cbOutput;
+        STACK_STRU( strUrlOutputW, MAX_PATH );
+        STACK_STRA( strUrlA, MAX_PATH );
+        LPWSTR      szQueryString;
+        DWORD       cchData;
+        DWORD       cbOutput;
 
         cchData = (DWORD)wcslen( pszUrl );
 
@@ -830,7 +832,7 @@ Return Value:
         // Prepare Output string
         //
         
-        if ( !buffUrlOutput.Resize( ( cchData + 1 ) *sizeof( WCHAR ) ) )  
+        if ( FAILED( hr = strUrlOutputW.Resize( cchData + 1 ) ) )
         {
             return HRESULT_FROM_WIN32( GetLastError() );
         }
@@ -843,7 +845,7 @@ Return Value:
             strUrlA.QueryStr(),
             strUrlA.QueryCB(),
             &cbOutput,
-            (WCHAR *) buffUrlOutput.QueryPtr(),
+            strUrlOutputW.QueryStr(),
             &szQueryString
             );
 
@@ -851,7 +853,6 @@ Return Value:
         {
             return hr;
         }
-
 
         //
         // Terminate the string at the query so that the
@@ -861,8 +862,10 @@ Return Value:
 
         if ( szQueryString != NULL )
         {
-            ((WCHAR *) buffUrlOutput.QueryPtr())[ cbOutput - wcslen( szQueryString )] = 0;
+            (strUrlOutputW.QueryStr())[ cbOutput / sizeof( WCHAR ) - wcslen( szQueryString )] = 0;
         }
+
+        strUrlOutputW.SyncWithBuffer();
 
         //
         // normalized string will never be longer than the original one
@@ -874,7 +877,7 @@ Return Value:
         // Write the normalized URL over the input data
         //
 
-        hr = StringCchCopyW( pszUrl, cchData+1, (WCHAR *) buffUrlOutput.QueryPtr() );
+        hr = StringCchCopyW( pszUrl, cchData+1, strUrlOutputW.QueryStr() );
         if ( FAILED( hr )  )
         {
             return hr;
