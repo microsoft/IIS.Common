@@ -830,7 +830,7 @@ Return Value:
         }
     }
 
-    pszBuffer = reinterpret_cast<WCHAR*>(reinterpret_cast<BYTE*>(m_Buff.QueryPtr()) + cbOffset);
+    pszBuffer = reinterpret_cast<WCHAR*>(reinterpret_cast<BYTE*>(m_Buff.QueryPtr()) + cbOffset);  // CodeQL [SM02986] BYTE* buffer is used for storing string.
     cchBuffer = ( m_Buff.QuerySize() - cbOffset - sizeof( WCHAR ) ) / sizeof( WCHAR );
 
     cchCharsCopied = MultiByteToWideChar(

@@ -131,7 +131,7 @@ public:
     //  Return the string buffer
     //
     WCHAR * QueryStrA( VOID ) const { return ( QueryStr()); }
-    WCHAR * QueryStr( VOID ) const { return ((WCHAR *) QueryPtr()); }
+    WCHAR * QueryStr( VOID ) const { return ((WCHAR *) QueryPtr()); } // CodeQL [SM02986] BYTE* buffer is used for storing MultiSz.
 
     //
     //  Makes a clone of the current string in the string pointer passed in.

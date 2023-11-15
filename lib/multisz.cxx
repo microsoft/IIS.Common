@@ -225,10 +225,10 @@ BOOL MULTISZ::AuxAppend( const WCHAR * pStr, UINT cbStr, BOOL fAddSlop )
     memcpy( (BYTE *) QueryPtr() + cbThis,
             pStr,
             cbStr);
-    *(WCHAR *)((BYTE *)QueryPtr() + cbThis + cbStr) = L'\0';
-    *(WCHAR *)((BYTE *)QueryPtr() + cbThis + cbStr + sizeof(WCHAR) ) = L'\0';
+    *(WCHAR *)((BYTE *)QueryPtr() + cbThis + cbStr) = L'\0'; // CodeQL [SM02986] BYTE* buffer is used for storing MultiSz.
+    *(WCHAR *)((BYTE *)QueryPtr() + cbThis + cbStr + sizeof(WCHAR) ) = L'\0'; // CodeQL [SM02986] BYTE* buffer is used for storing MultiSz.
 
-    m_cchLen = CalcLength( (const WCHAR *)QueryPtr(), &m_cStrings );
+    m_cchLen = CalcLength( (const WCHAR *)QueryPtr(), &m_cStrings ); // CodeQL [SM02986] BYTE* buffer is used for storing MultiSz.
     return TRUE;
 
 } // MULTISZ::AuxAppend()
