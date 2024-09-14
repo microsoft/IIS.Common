@@ -83,7 +83,7 @@ private:
     //
     PVOID   m_pVariables;
     SIZE_T  m_Alignment;
-    SIZE_T  m_VariablesCount;
+    DWORD   m_VariablesCount;
 };
 
 template<typename T>
